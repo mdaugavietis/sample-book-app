@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                build()
+                script {
+                  build()
+                }
             }
         }
         stage('Deploy to DEV') {
