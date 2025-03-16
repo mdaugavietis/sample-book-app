@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Test on STG') {
             steps {
-                test("DEV")
+                test("STG")
             }
         }
         stage('Deploy to PRD') {
@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Test on PRD') {
             steps {
-                test("DEV")
+                test("PRD")
             }
         }
     }
