@@ -51,7 +51,8 @@ def build() {
 
 def deploy(String environment, int port){
     echo "Deployment to ${environment} has started.."
-    sh "pm2 delete \"books-${environment}\""
+    // Uz nixos pēc darba visi konvejiera čaulas darbi tiek notīrīti
+    // sh "pm2 delete \"books-${environment}\""
     sh "pm2 start -n \"books-${environment}\" index.js -- ${port}"
 }
 
