@@ -13,6 +13,8 @@ jobs:
       - name: Print step name
         run: 
           echo "Building of node application is starting.."
+      - name: Install all dependencies
+        run: npm install
   deploy-dev:
     runs-on: self-hosted
     needs: [ build ]
@@ -21,6 +23,12 @@ jobs:
       - name: Print step name
         run: 
           echo "Deployment to DEV has started.."
+      - name: Install all dependencies
+        run: npm install
+      - name: Delete existing pm2 service
+        run: pm2 delete "BOOKS-DEV"
+      - name: Run sample-book-app pm2 service
+        run: pm2 start -n "BOOKS-DEV" index.js -- 1050
   test-dev:
     runs-on: self-hosted
     needs: [ deploy-dev ]
