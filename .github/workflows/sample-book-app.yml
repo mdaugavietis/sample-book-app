@@ -25,9 +25,9 @@ jobs:
     needs: [ deploy-dev ]
     steps:
      - uses: ./.github/actions/test
-        with:
-          test-suite: 'BOOKS'
-          environment: 'DEV'
+       with:
+        test-suite: 'BOOKS'
+        environment: 'DEV'
   deploy-stg:
     runs-on: self-hosted
     needs: [ test-dev ]
@@ -42,9 +42,9 @@ jobs:
     needs: [ deploy-stg ]
     steps:
      - uses: ./.github/actions/test
-        with:
-          test-suite: 'BOOKS'
-          environment: 'STG'
+       with:
+         test-suite: 'BOOKS'
+         environment: 'STG'
   deploy-prd:
     runs-on: self-hosted
     needs: [ test-stg ]
@@ -59,6 +59,6 @@ jobs:
     needs: [ deploy-prd ]
     steps:
      - uses: ./.github/actions/test
-        with:
-          test-suite: 'BOOKS'
-          environment: 'PRD'
+       with:
+        test-suite: 'BOOKS'
+        environment: 'PRD'
