@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test on DEV') {
             steps {
-                test("DEV")
+                test("BOOKS", "DEV")
             }
         }
         stage('Deploy to STG') {
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Test on STG') {
             steps {
-                test("STG")
+                test("BOOKS", "STG")
             }
         }
         stage('Deploy to PRD') {
@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Test on PRD') {
             steps {
-                test("PRD")
+                test("BOOKS", "PRD")
             }
         }
     }
@@ -57,6 +57,9 @@ def deploy(String environment, int port){
     sh "pm2 start -n \"books-${environment}\" index.js -- ${port}"
 }
 
-def test(String environment){
-    echo "Testing on ${environment} has started.."
+def test(String testSet, environment){
+    echo "Testing  ${testSet} test set on ${environment} has started.."
+    git branch : 'book_test', poll: false, url: 'https://github.com/mdaugavietis/api-automation' 
+    sh "npm install"
+    sh "npm run ${testSet} ${testSet}_${environment}"
 }
