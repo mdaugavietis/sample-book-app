@@ -24,16 +24,10 @@ jobs:
     runs-on: self-hosted
     needs: [ deploy-dev ]
     steps:
-      - uses: actions/checkout@v4
+     - uses: ./.github/actions/test
         with:
-          repository: 'mdaugavietis/api-automation'
-      - name: Print step name
-        run: 
-          echo "Testing BOOKS test set on DEV has started.."
-      - name: Install all dependencies
-        run: npm install
-      - name: Run API test
-        run: npm run BOOKS BOOKS_DEV
+          test-suite: 'BOOKS'
+          environment: 'DEV'
   deploy-stg:
     runs-on: self-hosted
     needs: [ test-dev ]
@@ -47,10 +41,10 @@ jobs:
     runs-on: self-hosted
     needs: [ deploy-stg ]
     steps:
-      - uses: actions/checkout@v4
-      - name: Print step name
-        run: 
-          echo "Testing BOOKS test set on STG has started.."
+     - uses: ./.github/actions/test
+        with:
+          test-suite: 'BOOKS'
+          environment: 'STG'
   deploy-prd:
     runs-on: self-hosted
     needs: [ test-stg ]
@@ -64,7 +58,7 @@ jobs:
     runs-on: self-hosted
     needs: [ deploy-prd ]
     steps:
-      - uses: actions/checkout@v4
-      - name: Print step name
-        run: 
-          echo "Testing BOOKS test set on PRD has started.."
+     - uses: ./.github/actions/test
+        with:
+          test-suite: 'BOOKS'
+          environment: 'PRD'
