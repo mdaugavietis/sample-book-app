@@ -16,7 +16,9 @@ runs:
       - name: Install all dependencies
         run: npm install
         shell: bash
-      # might need to add delete process pm2
+      - name: Delete existing pm2 service
+        run: RUNNER_TRACKING_ID="" && pm2 delete "books-${{ inputs.environment }}" || exit 0
+        shell: bash
       - name: Run sample-book-app pm2 service
-        run: RUNNER_TRACKING_ID="" && pm2 start -n "BOOKS-${{ inputs.environment }}" index.js -- ${{ inputs.port }}
+        run: pm2 start -n "BOOKS-${{ inputs.environment }}" index.js -- ${{ inputs.port }}
         shell: bash
