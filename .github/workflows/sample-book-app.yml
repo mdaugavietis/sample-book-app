@@ -34,9 +34,16 @@ jobs:
     needs: [ deploy-dev ]
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: 'mdaugavietis/api-automation'
+          ref: 'main'
       - name: Print step name
         run: 
           echo "Testing BOOKS test set on DEV has started.."
+      - name: Install all dependencies
+        run: npm install
+      - name: Run API test
+        run: npm run BOOKS BOOKS_DEV
   deploy-stg:
     runs-on: self-hosted
     needs: [ test-dev ]
