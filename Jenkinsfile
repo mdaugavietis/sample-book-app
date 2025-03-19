@@ -45,7 +45,6 @@ pipeline {
 }
 def build() {
     echo 'Building of node application is starting..'
-    git branch : 'main', poll: false, url: 'ssh:git@github.com/mdaugavietis/sample-book-app' 
     sh "npm install"
     sh "npm test"
 }
@@ -54,6 +53,8 @@ def deploy(String environment, int port){
     echo "Deployment to ${environment} has started.."
     // Uz nixos pēc darba visi konvejiera čaulas darbi tiek notīrīti
     // sh "pm2 delete \"books-${environment}\""
+    git branch : 'main', poll: false, url: 'https://github.com/mdaugavietis/sample-book-app' 
+    sh "npm install"
     sh "pm2 start -n \"books-${environment}\" index.js -- ${port}"
 }
 
