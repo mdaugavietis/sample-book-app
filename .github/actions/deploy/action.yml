@@ -18,5 +18,5 @@ runs:
         shell: bash
       # might need to add delete process pm2
       - name: Run sample-book-app pm2 service
-        run: pm2 start -n "BOOKS-${{ inputs.environment }}" index.js -- ${{ inputs.port }}
+        run: RUNNER_TRACKING_ID="" && pm2 start -n "BOOKS-${{ inputs.environment }}" index.js -- ${{ inputs.port }}
         shell: bash
