@@ -59,7 +59,7 @@ def deploy(String environment, int port){
 
 def test(String testSet, environment){
     echo "Testing  ${testSet} test set on ${environment} has started.."
-    git branch : 'book_test', poll: false, url: 'https://github.com/mdaugavietis/api-automation' 
+    git branch : 'main', poll: false, url: 'https://github.com/mdaugavietis/api-automation' 
     sh "npm install"
     sh "npm run ${testSet} ${testSet}_${environment}"
 }
