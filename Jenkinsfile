@@ -45,7 +45,7 @@ pipeline {
 }
 def build() {
     echo 'Building of node application is starting..'
-    sh "ls"
+    git branch : 'main', poll: false, url: 'https://github.com/mdaugavietis/sample-book-app' 
     sh "npm install"
     sh "npm test"
 }
