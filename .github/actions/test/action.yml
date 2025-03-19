@@ -11,9 +11,9 @@ inputs:
 runs:
   using: composite
   steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: 'mdaugavietis/api-automation'
+    - uses: actions/checkout@v4
+      with:
+        repository: 'mdaugavietis/api-automation'
     - name: Print step name
       run: echo "Testing ${{ inputs.test-suite }} test set on ${{ inputs.environment }} has started.."
       shell: bash
