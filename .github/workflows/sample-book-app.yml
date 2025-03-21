@@ -24,10 +24,13 @@ jobs:
     runs-on: self-hosted
     needs: [ deploy-dev ]
     steps:
-     - uses: ./.github/actions/test
-       with:
-        test-suite: 'BOOKS'
-        environment: 'DEV'
+      - uses: actions/checkout@v4
+        with:
+          repository: 'mdaugavietis/api-automation'
+      - uses: ./.github/actions/test
+        with:
+          test-suite: 'BOOKS'
+          environment: 'DEV'
   deploy-stg:
     runs-on: self-hosted
     needs: [ test-dev ]
@@ -41,10 +44,13 @@ jobs:
     runs-on: self-hosted
     needs: [ deploy-stg ]
     steps:
-     - uses: ./.github/actions/test
-       with:
-         test-suite: 'BOOKS'
-         environment: 'STG'
+      - uses: actions/checkout@v4
+        with:
+          repository: 'mdaugavietis/api-automation'
+      - uses: ./.github/actions/test
+        with:
+          test-suite: 'BOOKS'
+          environment: 'STG'
   deploy-prd:
     runs-on: self-hosted
     needs: [ test-stg ]
@@ -58,7 +64,10 @@ jobs:
     runs-on: self-hosted
     needs: [ deploy-prd ]
     steps:
-     - uses: ./.github/actions/test
-       with:
-        test-suite: 'BOOKS'
-        environment: 'PRD'
+      - uses: actions/checkout@v4
+        with:
+          repository: 'mdaugavietis/api-automation'
+      - uses: ./.github/actions/test
+        with:
+          test-suite: 'BOOKS'
+          environment: 'PRD'
