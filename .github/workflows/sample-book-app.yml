@@ -27,7 +27,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: 'mdaugavietis/api-automation'
-      - uses: ./.github/actions/test
+      - uses: actions/checkout@v4
+        with:
+          repository: 'mdaugavietis/sample-book-app'
+          path: 'sample-book-app'
+          sparse-checkout: |
+            .github
+      - uses: ./sample-book-app/.github/actions/test
         with:
           test-suite: 'BOOKS'
           environment: 'DEV'
